@@ -56,7 +56,7 @@ export default function LandingPage() {
               Find Your Calm, One Breath at a Time
             </h1>
             <p className="text-lg text-muted-foreground md:text-xl">
-              Breathe Easy is your personal sanctuary to cultivate mindfulness, build healthy habits, and reflect on your emotional well-being.
+              Unwinding is your personal sanctuary to cultivate mindfulness, build healthy habits, and reflect on your emotional well-being.
             </p>
             <Button size="lg" asChild>
               <Link href="/signup">Start Your Journey Today</Link>
@@ -116,7 +116,7 @@ export default function LandingPage() {
 
       <footer className="bg-background py-6">
         <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Breathe Easy. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Unwinding. All rights reserved.</p>
         </div>
       </footer>
     </div>

@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Breathe Easy',
+  title: 'Unwinding',
   description:
     'Your personal sanctuary to cultivate mindfulness, build healthy habits, and reflect on your emotional well-being.',
 };
@@ -24,7 +24,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Nunito:ital,wght@0,400;0,700;1,400&display=swap"
           rel="stylesheet"
         />
       </head>

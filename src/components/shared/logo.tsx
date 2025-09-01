@@ -12,7 +12,7 @@ export function Logo({ inSidebar = false }: { inSidebar?: boolean }) {
             : ""
         }`}
       >
-        Breathe Easy
+        Unwinding
       </span>
     </Link>
   );

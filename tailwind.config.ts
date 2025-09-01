@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ["'Lato'", 'sans-serif'],
-        headline: ["'Merriweather'", 'serif'],
+        body: ["'Nunito'", 'sans-serif'],
+        headline: ["'Lora'", 'serif'],
         code: ['monospace'],
       },
       colors: {
