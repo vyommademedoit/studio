@@ -13,6 +13,7 @@ export default {
         body: ["'Nunito'", 'sans-serif'],
         headline: ["'Lora'", 'serif'],
         code: ['monospace'],
+        prompt: ["'Times New Roman'", 'Times', 'serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

@@ -104,7 +104,7 @@ export function DailyReflection() {
         {loadingQuestion ? (
           <Skeleton className="h-8 w-full" />
         ) : (
-          <p className="text-lg font-medium text-foreground">{question}</p>
+          <p className="font-prompt text-lg font-medium text-foreground">{question}</p>
         )}
         <Textarea
           placeholder="Write your thoughts here..."
