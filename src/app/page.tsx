@@ -67,7 +67,8 @@ export default function LandingPage() {
               src="https://picsum.photos/600/400"
               data-ai-hint="serene landscape"
               alt="Serene landscape"
-              fill
+              width={600}
+              height={400}
               className="rounded-lg object-cover shadow-lg"
             />
           </div>

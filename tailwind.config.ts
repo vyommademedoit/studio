@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ["'Nunito'", 'sans-serif'],
-        headline: ["'Lora'", 'serif'],
+        body: ['var(--font-nunito)', 'sans-serif'],
+        headline: ['var(--font-lora)', 'serif'],
         code: ['monospace'],
         prompt: ["'Times New Roman'", 'Times', 'serif'],
       },
