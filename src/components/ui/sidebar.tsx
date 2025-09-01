@@ -577,9 +577,11 @@ const SidebarMenuButton = React.forwardRef<
       }
     }
 
+    const trigger = asChild ? <Slot>{button}</Slot> : button
+
     return (
       <Tooltip>
-        <TooltipTrigger asChild>{button}</TooltipTrigger>
+        <TooltipTrigger asChild>{trigger}</TooltipTrigger>
         <TooltipContent
           side="right"
           align="center"
