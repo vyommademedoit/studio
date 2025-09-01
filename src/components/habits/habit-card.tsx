@@ -55,18 +55,16 @@ export function HabitCard({
       .map((d) => new Date(d))
       .sort((a, b) => b.getTime() - a.getTime());
 
-    let lastDate = new Date();
+    let lastDate;
 
-    if (isToday(sortedDates[0]) || isYesterday(sortedDates[0])) {
-      if (isToday(sortedDates[0])) {
-         currentStreak = 1;
-         lastDate = sortedDates[0];
-      } else { // isYesterday
-         currentStreak = 1;
-         lastDate = sortedDates[0];
-      }
+    if (isToday(sortedDates[0])) {
+      currentStreak = 1;
+      lastDate = sortedDates[0];
+    } else if (isYesterday(sortedDates[0])) {
+      currentStreak = 1;
+      lastDate = sortedDates[0];
     } else {
-        return 0;
+      return 0;
     }
     
     for (let i = 1; i < sortedDates.length; i++) {
@@ -139,7 +137,7 @@ export function HabitCard({
                 </AlertDialogContent>
               </AlertDialog>
             </DropdownMenuContent>
-          </div>
+          </DropdownMenu>
         </div>
         <CardDescription>
           {habit.type === "good" ? "Build this habit" : "Quit this habit"}
