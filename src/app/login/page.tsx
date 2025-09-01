@@ -102,12 +102,14 @@ export default function LoginPage() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading && (
-              <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Login
-          </Button>
+          <div className="pt-2">
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading && (
+                <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Login
+            </Button>
+          </div>
         </form>
       </Form>
       <div className="mt-4 text-center text-sm">

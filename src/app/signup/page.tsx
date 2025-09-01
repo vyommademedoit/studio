@@ -145,7 +145,9 @@ export default function SignupPage() {
                       variant="ghost"
                       size="icon"
                       className="absolute right-1 top-1/2 h-7 w-7 -translate-y-1/2 text-muted-foreground"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
                     >
                       {showConfirmPassword ? (
                         <EyeOff className="h-4 w-4" />
@@ -159,12 +161,14 @@ export default function SignupPage() {
               </FormItem>
             )}
           />
-          <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading && (
-              <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
-            )}
-            Create Account
-          </Button>
+          <div className="pt-2">
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading && (
+                <LoaderCircle className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              Create Account
+            </Button>
+          </div>
         </form>
       </Form>
       <div className="mt-4 text-center text-sm">
