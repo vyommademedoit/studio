@@ -11,14 +11,14 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? (JSON.parse(item) as T) : initialValue;
+      return item ? (JSON.parse(item)) : initialValue;
     } catch (error) {
       console.warn(`Error reading localStorage key “${key}”:`, error);
       return initialValue;
     }
   }, [initialValue, key]);
 
-  const [storedValue, setStoredValue] = useState<T>(readValue);
+  const [storedValue, setStoredValue] = useState<T>(initialValue);
 
   const setValue = (value: T | ((val: T) => T)) => {
     if (typeof window == 'undefined') {
@@ -28,7 +28,7 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val
     }
 
     try {
-      const newValue = value instanceof Function ? value(storedValue) : value;
+      const newValue = value instanceof Function ? value(readValue()) : value;
       window.localStorage.setItem(key, JSON.stringify(newValue));
       setStoredValue(newValue);
       window.dispatchEvent(new Event("local-storage"));
@@ -39,7 +39,8 @@ function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T | ((val
   
   useEffect(() => {
     setStoredValue(readValue());
-  }, [readValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   
   useEffect(() => {
     const handleStorageChange = () => {
