@@ -9,6 +9,7 @@ import {
   signOut,
   sendPasswordResetEmail,
   updateProfile,
+  updatePassword,
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useToast } from "@/hooks/use-toast";
@@ -102,6 +103,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const changePassword = async (newPassword: string) => {
+    if (!auth.currentUser) {
+      toast({
+        variant: "destructive",
+        title: "Not Authenticated",
+        description: "You must be logged in to change your password.",
+      });
+      throw new Error("User not authenticated");
+    }
+    try {
+      await updatePassword(auth.currentUser, newPassword);
+      toast({
+        title: "Password Updated",
+        description: "Your password has been changed successfully.",
+      });
+    } catch (error: any) {
+       toast({
+        variant: "destructive",
+        title: "Password Update Failed",
+        description: error.message,
+      });
+      throw error;
+    }
+  }
+
   const value = {
     user,
     loading,
@@ -109,6 +135,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signup,
     logout,
     resetPassword,
+    changePassword,
   };
 
   return (

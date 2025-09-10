@@ -19,6 +19,7 @@ import Link from "next/link";
 import { AuthLayout } from "@/components/auth/auth-layout";
 import { useState } from "react";
 import { Eye, EyeOff, LoaderCircle } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -129,6 +130,15 @@ export default function LoginPage() {
           Sign up
         </Link>
       </div>
+       <Separator className="my-6" />
+        <div className="text-center text-sm">
+           <Link
+            href="/"
+            className="underline underline-offset-4 hover:text-primary"
+          >
+            Back to Home
+          </Link>
+        </div>
     </AuthLayout>
   );
 }
