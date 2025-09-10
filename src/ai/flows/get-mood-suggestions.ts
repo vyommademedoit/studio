@@ -41,9 +41,9 @@ const prompt = ai.definePrompt({
   name: 'moodSuggestionsPrompt',
   input: { schema: GetMoodSuggestionsInputSchema },
   output: { schema: GetMoodSuggestionsOutputSchema },
-  prompt: `You are a cheerful and encouraging wellness coach. Based on the user's preferred activities, generate a list of 3-4 simple, actionable, and creative suggestions to help them improve their mood.
+  prompt: `You are a cheerful and encouraging wellness coach. Your goal is to provide creative, uplifting, and actionable suggestions to help someone improve their mood, based on their favorite activities.
 
-Keep the suggestions concise and easy to understand.
+Generate a list of 3-4 unique and simple ideas. For each suggestion, provide a brief, encouraging sentence to motivate the user. Frame the suggestions as invitations, not commands.
 
 User's Preferred Activities:
 {{#each preferences}}

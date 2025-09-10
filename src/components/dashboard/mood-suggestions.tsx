@@ -12,6 +12,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -93,18 +94,22 @@ export function MoodSuggestions() {
         )}
         {!isLoading && !hasPreferences && (
           <Alert>
-            <AlertTitle>Set Your Preferences!</AlertTitle>
+            <AlertTitle>Personalize Your Suggestions!</AlertTitle>
             <AlertDescription>
               <p>
-                Go to your profile to select your favorite activities for personalized mood suggestions.
+                To get mood-boosting ideas tailored just for you, set your favorite wellness activities in your profile.
               </p>
-              <Button asChild variant="link" className="px-0">
-                <Link href="/profile">Go to Profile</Link>
-              </Button>
             </AlertDescription>
           </Alert>
         )}
       </CardContent>
+      {!isLoading && !hasPreferences && (
+        <CardFooter>
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/profile">Set Preferences in Profile</Link>
+            </Button>
+        </CardFooter>
+      )}
     </Card>
   );
 }
