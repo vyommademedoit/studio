@@ -12,7 +12,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  CardFooter
+  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -44,9 +44,13 @@ export function MoodSuggestions() {
     try {
       const result = await getMoodSuggestions({ preferences });
       setSuggestions(result);
-    } catch (e) {
+    } catch (e: any) {
       console.error(e);
-      setError("Failed to get suggestions. Please try again later.");
+      if (e.message?.includes("503")) {
+        setError("The AI is currently busy. Please try again in a moment.");
+      } else {
+        setError("Failed to get suggestions. Please try again later.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -56,6 +60,7 @@ export function MoodSuggestions() {
     if (preferences.length > 0) {
       fetchSuggestions();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [preferences]);
 
   const hasPreferences = preferences.length > 0;
@@ -103,13 +108,18 @@ export function MoodSuggestions() {
           </Alert>
         )}
       </CardContent>
-      {!isLoading && !hasPreferences && (
-        <CardFooter>
+       <CardFooter className="flex-col items-start gap-4">
+        {!isLoading && hasPreferences && (
+          <Button variant="outline" size="sm" onClick={fetchSuggestions}>
+            Get New Suggestions
+          </Button>
+        )}
+        {!isLoading && !hasPreferences && (
             <Button asChild variant="outline" className="w-full">
               <Link href="/profile">Set Preferences in Profile</Link>
             </Button>
-        </CardFooter>
-      )}
+        )}
+      </CardFooter>
     </Card>
   );
 }
