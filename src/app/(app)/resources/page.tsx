@@ -12,32 +12,32 @@ import type { Resource } from "@/types";
 
 const resources: Resource[] = [
   {
-    name: "National Suicide Prevention Lifeline",
+    name: "Vandrevala Foundation Mental Health Helpline",
     description:
-      "Provides 24/7, free and confidential support for people in distress, prevention and crisis resources for you or your loved ones.",
-    phone: "988",
-    website: "https://988lifeline.org/",
+      "A 24/7 helpline providing free psychological counseling and crisis intervention for anyone feeling distressed, depressed, or suicidal.",
+    phone: "9999666555",
+    website: "https://www.vandrevalafoundation.com/",
   },
   {
-    name: "Crisis Text Line",
+    name: "iCALL Psychosocial Helpline",
     description:
-      "Text HOME to 741741 from anywhere in the US, anytime, about any type of crisis. A live, trained Crisis Counselor receives the text and responds, all from our secure online platform.",
-    phone: "Text HOME to 741741",
-    website: "https://www.crisistextline.org/",
+      "A service by the Tata Institute of Social Sciences (TISS) offering free telephone and email-based counseling services, run by trained mental health professionals.",
+    phone: "022-25521111",
+    website: "https://icallhelpline.org/",
   },
   {
-    name: "The Trevor Project",
+    name: "KIRAN Mental Health Rehabilitation Helpline",
     description:
-      "The leading national organization providing crisis intervention and suicide prevention services to lesbian, gay, bisexual, transgender, queer & questioning (LGBTQ) young people under 25.",
-    phone: "1-866-488-7386",
-    website: "https://www.thetrevorproject.org/",
+      "A 24/7 helpline by the Ministry of Social Justice and Empowerment for early screening, first-aid, psychological support, and mental well-being services.",
+    phone: "1800-599-0019",
+    website: "https://www.socialjustice.gov.in/",
   },
   {
-    name: "NAMI (National Alliance on Mental Illness)",
+    name: "AASRA",
     description:
-      "The nation’s largest grassroots mental health organization dedicated to building better lives for the millions of Americans affected by mental illness.",
-    phone: "1-800-950-NAMI (6264)",
-    website: "https://www.nami.org/",
+      "A 24/7 helpline for those who are distressed, depressed, or suicidal. They provide confidential and non-judgmental emotional support.",
+    phone: "9820466726",
+    website: "http://www.aasra.info/",
   },
 ];
 
