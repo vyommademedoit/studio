@@ -16,19 +16,19 @@
 
 ### **Abstract**
 
-The Unwinding project aims to develop a comprehensive personal wellness sanctuary in the form of a web application. The primary objective is to provide users with a private, secure, and integrated platform for cultivating mindfulness, building healthy habits, and reflecting on their emotional well-being. The methodology involves using a modern web stack, including Next.js for the frontend, Firebase for authentication and backend services, and Google's Genkit for integrating generative AI features. The main result is a functional application featuring a mindful journaling system with AI-powered analysis, a habit tracker, a guided meditation space, and AI-generated daily reflection prompts. The application prioritizes user privacy by leveraging local storage for sensitive data, ensuring a personalized and secure user experience.
+The Unwinding project aims to develop a comprehensive personal wellness sanctuary as a web application, specifically addressing the need for accessible mental health tools in India. The primary objective is to provide users with a private, secure, and culturally relevant platform for cultivating mindfulness and reflecting on their emotional well-being, particularly in a context where mental health resources are scarce. The methodology involves using a modern web stack, including Next.js for the frontend, Firebase for authentication, and Google's Genkit for generative AI features. The main result is a functional application featuring a mindful journaling system with AI-powered analysis, a habit tracker, a guided meditation space, and AI-generated reflection prompts. The application prioritizes user privacy by leveraging local storage, ensuring a personalized and secure user experience.
 
-**Keywords**: Mental Wellness, Mindfulness, Next.js, Firebase, Generative AI.
+**Keywords**: Mental Wellness, Mindfulness, India, Next.js, Firebase, Generative AI.
 
 ---
 
 ### **1. Introduction / Background**
 
-In today's fast-paced world, maintaining mental well-being is more critical than ever. Many individuals seek tools to manage stress, cultivate positive habits, and engage in self-reflection. While numerous digital wellness applications exist, they are often fragmented, lack personalization, or raise privacy concerns. The Unwinding application is designed to address these gaps by providing an all-in-one, private sanctuary for mental wellness, leveraging modern technology to create a supportive and engaging user experience.
+In today's fast-paced world, maintaining mental well-being is a global challenge, yet the accessibility of resources varies dramatically. In India, while awareness is growing, there remains a significant gap in the availability of accessible, private, and non-stigmatizing mental health tools. Many individuals seek ways to manage stress and engage in self-reflection but face cultural and logistical barriers. The Unwinding application is designed to address this gap by providing an all-in-one, private sanctuary for mental wellness, leveraging modern technology to create a supportive experience tailored for the Indian user.
 
 ### **2. Problem Statement**
 
-There is a need for a private, user-centric, and comprehensive digital tool that integrates key wellness practices—such as journaling, habit tracking, and meditation—with personalized, AI-driven insights, without compromising user data security.
+In a country like India, where mental health resources are scarce and often stigmatized, there is a critical need for a private, user-centric, and comprehensive digital tool that integrates key wellness practices with personalized AI-driven insights, without compromising user data security.
 
 ### **3. Objectives**
 
@@ -46,6 +46,7 @@ The primary objectives of this project are to:
 *   Full CRUD (Create, Read, Update, Delete) functionality for journal entries and habits.
 *   AI-powered features for journal analysis and mood suggestions.
 *   Client-side data storage for journal entries and habits using Local Storage.
+*   Inclusion of India-specific mental health helpline resources.
 
 **Limitations:**
 *   The application is a web app and is not a native mobile application.
@@ -185,4 +186,31 @@ The dashboard presents the user with a unique daily reflection question.
 <div align="center">
   <img src="https://storage.googleapis.com/stabl-media/e102604e-e11d-44a3-9523-a55e97da672c.png" alt="AI Flow for Daily Reflection" width="700">
   <p><em>Figure 3: Step-by-step process of fetching an AI-generated question.</em></p>
+</div>
+
+#### **Step 4: Accessing Localized Resources**
+
+Recognizing the target demographic, the app provides a curated list of mental health resources in India.
+
+1.  **UI**: The user navigates to the Resources page (`src/app/(app)/resources/page.tsx`).
+2.  **Data Source**: The page contains a hardcoded array of Indian mental health organizations, including their descriptions, phone numbers, and websites.
+3.  **Display**: This data is mapped over to render a series of `Card` components, each providing clear and actionable information for a user in need of immediate help. This approach ensures that critical information is always available without relying on external APIs.
+
+<div align="center">
+  <img src="https://storage.googleapis.com/stabl-media/8718a3a9-e092-4919-948f-4ac6e812fd5d.png" alt="Resources Page" width="700">
+  <p><em>Figure 4: The Resources page displaying India-specific helplines.</em></p>
+</div>
+
+#### **Step 5: AI-Powered Journal Analysis**
+
+The app offers a feature to analyze journal entries for deeper self-awareness.
+
+1.  **UI**: On the Journal Analysis page (`/journal/analysis`), the user can click a button to start the analysis. The button is only enabled if they have a sufficient number of entries (e.g., 3 or more).
+2.  **Connectivity**: On-click, the frontend gathers the content of all journal entries stored in local storage and sends them to the `analyzeJournalEntries` server function.
+3.  **AI Flow**: This function calls a Genkit flow defined in `src/ai/flows/analyze-journal-entries.ts`. The flow is prompted to act as a wellness expert, analyzing the text for overall sentiment, emotional trends, and mental state insights.
+4.  **Response**: The structured analysis is returned to the frontend and displayed in distinct cards, giving the user a high-level overview of their recent emotional state.
+
+<div align="center">
+  <img src="https://storage.googleapis.com/stabl-media/ba8a6b18-090c-43f9-bf7b-40280f555e14.png" alt="Journal Analysis Flow" width="700">
+  <p><em>Figure 5: The flow of data for AI-powered journal analysis.</em></p>
 </div>
