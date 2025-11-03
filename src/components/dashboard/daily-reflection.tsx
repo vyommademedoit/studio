@@ -13,7 +13,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Sparkles, LoaderCircle } from "lucide-react";
+import { Sparkles, LoaderCircle, RefreshCw } from "lucide-react";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { JournalEntry } from "@/types";
 import { useToast } from "@/hooks/use-toast";
@@ -30,6 +30,26 @@ export function DailyReflection() {
   );
   const { toast } = useToast();
 
+  const fetchQuestion = async () => {
+    try {
+      setLoadingQuestion(true);
+      const { question: newQuestion } = await getDailyReflectionQuestion();
+      const today = format(new Date(), "yyyy-MM-dd");
+      setQuestion(newQuestion);
+      localStorage.setItem("dailyQuestion", JSON.stringify({ date: today, question: newQuestion }));
+    } catch (error) {
+      console.error("Failed to fetch daily question:", error);
+      setQuestion("What are you grateful for today?"); // Fallback question
+      toast({
+        variant: "destructive",
+        title: "Could not fetch new question",
+        description: "Please try again in a moment.",
+      });
+    } finally {
+      setLoadingQuestion(false);
+    }
+  };
+
   useEffect(() => {
     const today = format(new Date(), "yyyy-MM-dd");
     const storedQuestionData = localStorage.getItem("dailyQuestion");
@@ -42,21 +62,8 @@ export function DailyReflection() {
         return;
       }
     }
-
-    async function fetchQuestion() {
-      try {
-        setLoadingQuestion(true);
-        const { question: newQuestion } = await getDailyReflectionQuestion();
-        setQuestion(newQuestion);
-        localStorage.setItem("dailyQuestion", JSON.stringify({ date: today, question: newQuestion }));
-      } catch (error) {
-        console.error("Failed to fetch daily question:", error);
-        setQuestion("What are you grateful for today?"); // Fallback question
-      } finally {
-        setLoadingQuestion(false);
-      }
-    }
     fetchQuestion();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSave = () => {
@@ -101,11 +108,23 @@ export function DailyReflection() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {loadingQuestion ? (
-          <Skeleton className="h-8 w-full" />
-        ) : (
-          <p className="font-prompt text-lg font-medium text-foreground">{question}</p>
-        )}
+        <div className="flex min-h-[4.5rem] items-start justify-between gap-4">
+          {loadingQuestion ? (
+            <Skeleton className="h-8 w-full" />
+          ) : (
+            <p className="font-prompt text-lg font-medium text-foreground">{question}</p>
+          )}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={fetchQuestion}
+            disabled={loadingQuestion}
+            className="flex-shrink-0"
+            aria-label="Get new question"
+          >
+            <RefreshCw className={`h-5 w-5 ${loadingQuestion ? 'animate-spin' : ''}`} />
+          </Button>
+        </div>
         <Textarea
           placeholder="Write your thoughts here..."
           value={reflection}
