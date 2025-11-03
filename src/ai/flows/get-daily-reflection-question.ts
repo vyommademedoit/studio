@@ -24,7 +24,16 @@ export async function getDailyReflectionQuestion(): Promise<DailyReflectionQuest
 const prompt = ai.definePrompt({
   name: 'dailyReflectionPrompt',
   output: {schema: DailyReflectionQuestionOutputSchema},
-  prompt: `You are a mindfulness expert. Your task is to generate a single, thought-provoking question that encourages deep reflection and journaling.  The question should be open-ended and suitable for a daily reflection prompt.`,
+  prompt: `You are a wise and compassionate wellness coach, specializing in crafting insightful questions for deep self-reflection. Your goal is to generate a single, unique, and thought-provoking question that encourages the user to pause and journal.
+
+Avoid generic or cliché questions like "What are you grateful for?". Instead, create questions that gently probe into areas like personal growth, emotional awareness, recent experiences, or future aspirations. The question should be open-ended, concise, and feel like a personal invitation to reflect.
+
+Here are some examples of the style you should aim for:
+- "What is one small, brave step you took this week, and what did it teach you?"
+- "If you could give your younger self one piece of advice right now, what would it be and why?"
+- "What emotion have you been trying to avoid lately, and what might happen if you allowed yourself to feel it?"
+
+Now, generate a new, single, thought-provoking question in that style.`,
 });
 
 const getDailyReflectionQuestionFlow = ai.defineFlow({
