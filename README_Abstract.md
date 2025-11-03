@@ -14,6 +14,18 @@
 
 ---
 
+**Saridhi Bhutani**  
+**Roll No.:** [RA2411003012012]  
+**Course:** [21CSC203T - Advanced Programming Practice]  
+**Guide:** [Mrs. G Rekha]  
+**Semester:** [3]  
+**Institution:** [SRM Institute of Science And Technology]  
+**Submission Date:** October 26, 2023
+
+</div>
+
+---
+
 ### **Abstract**
 
 The Unwinding project aims to develop a comprehensive personal wellness sanctuary as a web application, specifically addressing the need for accessible mental health tools in India. The primary objective is to provide users with a private, secure, and culturally relevant platform for cultivating mindfulness and reflecting on their emotional well-being, particularly in a context where mental health resources are scarce. The methodology involves using a modern web stack, including Next.js for the frontend, Firebase for authentication, and Google's Genkit for generative AI features. The main result is a functional application featuring a mindful journaling system with AI-powered analysis, a habit tracker, a guided meditation space, and AI-generated reflection prompts. The application prioritizes user privacy by leveraging local storage, ensuring a personalized and secure user experience.
