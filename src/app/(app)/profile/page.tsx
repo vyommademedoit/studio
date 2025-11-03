@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LogOut, LoaderCircle, Eye, EyeOff, Moon, Sun } from "lucide-react";
+import { LogOut, LoaderCircle, Eye, EyeOff } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -23,7 +23,6 @@ import { useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import useLocalStorage from "@/hooks/use-local-storage";
 import { useToast } from "@/hooks/use-toast";
-import { useTheme } from "next-themes";
 
 const passwordFormSchema = z
   .object({
@@ -60,7 +59,6 @@ export default function ProfilePage() {
   const { user, logout, changePassword } = useAuth();
   const router = useRouter();
   const { toast } = useToast();
-  const { setTheme } = useTheme();
   const [isPasswordLoading, setIsPasswordLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -149,23 +147,6 @@ export default function ProfilePage() {
                   ? new Date(user.metadata.creationTime).toLocaleDateString()
                   : "N/A"}
               </p>
-            </div>
-          </div>
-          <Separator />
-          <div className="space-y-4">
-            <h3 className="font-headline text-lg font-semibold">Theme</h3>
-            <p className="text-sm text-muted-foreground">
-              Switch between light and dark mode.
-            </p>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={() => setTheme("light")}>
-                <Sun className="mr-2 h-4 w-4" />
-                Light
-              </Button>
-              <Button variant="outline" onClick={() => setTheme("dark")}>
-                <Moon className="mr-2 h-4 w-4" />
-                Dark
-              </Button>
             </div>
           </div>
           <Separator />
