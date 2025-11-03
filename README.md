@@ -45,8 +45,9 @@ The primary objectives of this project are to:
 *   User authentication (signup, login, logout, password reset).
 *   Full CRUD (Create, Read, Update, Delete) functionality for journal entries and habits.
 *   AI-powered features for journal analysis and mood suggestions.
-*   Client-side data storage for journal entries and habits using Local Storage.
+*   Client-side data storage for journal entries and habits using Browser Local Storage to ensure maximum user privacy.
 *   Inclusion of India-specific mental health helpline resources.
+*   Light and Dark mode theme support for user comfort.
 
 **Limitations:**
 *   The application is a web app and is not a native mobile application.
@@ -66,6 +67,7 @@ graph TD
         UC4[Use Meditation Player]
         UC5[View AI Insights]
         UC6[View Resources]
+        UC7[Change Theme]
     end
 
     User --|> UC1
@@ -74,6 +76,7 @@ graph TD
     User --|> UC4
     User --|> UC5
     User --|> UC6
+    User --|> UC7
 
     UC1 --> (Login/Signup)
     UC1 --> (Update Profile & Password)
@@ -83,8 +86,9 @@ graph TD
     UC3 --> (Mark Habit as Done)
     UC5 --> (Get Journal Analysis)
     UC5 --> (Get Mood Suggestions)
+    UC7 --> (Toggle Light/Dark Mode)
 
-    linkStyle 0,1,2,3,4,5 stroke:#444,stroke-width:2px
+    linkStyle 0,1,2,3,4,5,6 stroke:#444,stroke-width:2px
 ```
 
 ---
@@ -99,10 +103,11 @@ graph TD
 *   **Backend & Authentication**: Firebase (Authentication)
 *   **Client-side Storage**: Browser Local Storage
 *   **Fonts**: Nunito & Lora (from Google Fonts)
+*   **Theming**: `next-themes`
 
 ### **7. System Architecture**
 
-The application employs a client-server architecture. The frontend is built with Next.js and React, rendering components on the server and client. Firebase provides secure user authentication. For AI features, client-side components make secure calls to server-side Genkit "flows," which then interface with the Google Generative AI API. Sensitive user data like journal entries and habits are stored exclusively on the client-side in the browser's Local Storage to ensure user privacy.
+The application employs a client-server architecture. The frontend is built with Next.js and React, rendering components on the server and client. Firebase provides secure user authentication. For AI features, client-side components make secure calls to server-side Genkit "flows," which then interface with the Google Generative AI API. **Crucially, sensitive user data like journal entries and habits are stored exclusively on the client-side in the browser's Local Storage to ensure maximum user privacy.** This design choice means data never leaves the user's device, making it a truly private sanctuary.
 
 ```mermaid
 graph TD
@@ -160,7 +165,22 @@ The user begins by either creating a new account or logging in.
   <p><em>Figure 1: The user authentication flow, from UI to Firebase.</em></p>
 </div>
 
-#### **Step 2: Storing a Habit (Client-Side)**
+#### **Step 2: Generating an AI Daily Reflection**
+
+The dashboard presents the user with a unique daily reflection question.
+
+1.  **UI**: The `DailyReflection` component (`src/components/dashboard/daily-reflection.tsx`) is rendered on the dashboard.
+2.  **Connectivity**: Inside a `useEffect` hook, the component checks if a question for the current day already exists in local storage. If not, it calls the `getDailyReflectionQuestion` server function. The user can also request a new question by clicking the refresh button.
+3.  **AI Flow**: This function, located at `src/ai/flows/get-daily-reflection-question.ts`, invokes a Genkit flow. The flow contains a highly specific prompt instructing the AI model to act as a compassionate wellness coach and generate a thought-provoking question, returning it as a structured JSON object.
+4.  **Backend (Genkit)**: Genkit sends the prompt to the Google Gemini model. The model generates the question, and Genkit ensures it matches the defined output schema.
+5.  **Response**: The question is returned to the `DailyReflection` component, which displays it to the user and saves it to local storage to prevent re-fetching on the same day unless requested.
+
+<div align="center">
+  <img src="https://storage.googleapis.com/stabl-media/395679ac-d2a9-450f-a45e-b8163f910403.png" alt="AI Flow for Daily Reflection with Refresh" width="700">
+  <p><em>Figure 2: Step-by-step process of fetching an AI-generated question, with a user option to refresh.</em></p>
+</div>
+
+#### **Step 3: Storing a Habit (Client-Side)**
 
 Once logged in, the user can track habits. This data is stored locally for privacy.
 
@@ -170,25 +190,23 @@ Once logged in, the user can track habits. This data is stored locally for priva
 
 <div align="center">
   <img src="https://storage.googleapis.com/stabl-media/6eb01e3b-f633-4f99-bb6e-82d8d85f8fa2.png" alt="Local Storage Mechanism" width="700">
-  <p><em>Figure 2: Diagram of the `useLocalStorage` hook managing habit data.</em></p>
+  <p><em>Figure 3: Diagram of the `useLocalStorage` hook managing habit data.</em></p>
 </div>
 
-#### **Step 3: Generating an AI Daily Reflection**
+#### **Step 4: Changing the Application Theme**
 
-The dashboard presents the user with a unique daily reflection question.
+Users can switch between a light and dark theme for visual comfort.
 
-1.  **UI**: The `DailyReflection` component (`src/components/dashboard/daily-reflection.tsx`) is rendered on the dashboard.
-2.  **Connectivity**: Inside a `useEffect` hook, the component checks if a question for the current day already exists in local storage. If not, it calls the `getDailyReflectionQuestion` server function.
-3.  **AI Flow**: This function, located at `src/ai/flows/get-daily-reflection-question.ts`, invokes a Genkit flow. The flow contains a prompt instructing the AI model to generate a thought-provoking question and return it as a structured JSON object.
-4.  **Backend (Genkit)**: Genkit sends the prompt to the Google Gemini model. The model generates the question, and Genkit ensures it matches the defined output schema.
-5.  **Response**: The question is returned to the `DailyReflection` component, which displays it to the user and saves it to local storage to prevent re-fetching on the same day.
+1.  **UI**: A theme toggle button is located in the header of the dashboard (`src/app/(app)/dashboard/page.tsx`).
+2.  **State Management**: The application uses the `next-themes` library. A `ThemeProvider` is wrapped around the root layout (`src/app/layout.tsx`). The `useTheme` hook is used in the `ThemeToggle` component (`src/components/shared/theme-toggle.tsx`) to access and change the current theme.
+3.  **Procedure**: When the user clicks the toggle, `setTheme` is called with 'light', 'dark', or 'system'. This updates the `data-theme` attribute on the `<html>` element, and the CSS variables defined in `src/app/globals.css` apply the appropriate color scheme.
 
 <div align="center">
-  <img src="https://storage.googleapis.com/stabl-media/e102604e-e11d-44a3-9523-a55e97da672c.png" alt="AI Flow for Daily Reflection" width="700">
-  <p><em>Figure 3: Step-by-step process of fetching an AI-generated question.</em></p>
+  <img src="https://storage.googleapis.com/stabl-media/d629a997-c88f-4d39-9d7a-11504df0f7e8.png" alt="Theme Toggle Mechanism" width="700">
+  <p><em>Figure 4: The mechanism for toggling between light and dark themes.</em></p>
 </div>
 
-#### **Step 4: Accessing Localized Resources**
+#### **Step 5: Accessing Localized Resources**
 
 Recognizing the target demographic, the app provides a curated list of mental health resources in India.
 
@@ -198,19 +216,5 @@ Recognizing the target demographic, the app provides a curated list of mental he
 
 <div align="center">
   <img src="https://storage.googleapis.com/stabl-media/8718a3a9-e092-4919-948f-4ac6e812fd5d.png" alt="Resources Page" width="700">
-  <p><em>Figure 4: The Resources page displaying India-specific helplines.</em></p>
-</div>
-
-#### **Step 5: AI-Powered Journal Analysis**
-
-The app offers a feature to analyze journal entries for deeper self-awareness.
-
-1.  **UI**: On the Journal Analysis page (`/journal/analysis`), the user can click a button to start the analysis. The button is only enabled if they have a sufficient number of entries (e.g., 3 or more).
-2.  **Connectivity**: On-click, the frontend gathers the content of all journal entries stored in local storage and sends them to the `analyzeJournalEntries` server function.
-3.  **AI Flow**: This function calls a Genkit flow defined in `src/ai/flows/analyze-journal-entries.ts`. The flow is prompted to act as a wellness expert, analyzing the text for overall sentiment, emotional trends, and mental state insights.
-4.  **Response**: The structured analysis is returned to the frontend and displayed in distinct cards, giving the user a high-level overview of their recent emotional state.
-
-<div align="center">
-  <img src="https://storage.googleapis.com/stabl-media/ba8a6b18-090c-43f9-bf7b-40280f555e14.png" alt="Journal Analysis Flow" width="700">
-  <p><em>Figure 5: The flow of data for AI-powered journal analysis.</em></p>
+  <p><em>Figure 5: The Resources page displaying India-specific helplines.</em></p>
 </div>

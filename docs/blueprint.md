@@ -1,4 +1,4 @@
-# **App Name**: Breathe Easy
+# **App Name**: UNWINDING
 
 ## Core Features:
 
