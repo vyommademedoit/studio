@@ -2,12 +2,12 @@
 
 **<h1>Unwinding: A Personal Wellness Sanctuary</h1>**
 
-**[Your Name]**  
-**Roll No.:** [Your Roll No.]  
-**Course:** [Your Course]  
-**Guide:** [Your Guide's Name]  
-**Semester:** [Your Semester]  
-**Institution:** [Your Institution]  
+**Vyom Chaturvedi**  
+**Roll No.:** [RA2411003011989]  
+**Course:** [21CSC203T - Advanced Programming Practice]  
+**Guide:** [Mrs. G Rekha]  
+**Semester:** [3]  
+**Institution:** [SRM Institute of Science And Technology]  
 **Submission Date:** October 26, 2023
 
 </div>
