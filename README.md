@@ -193,7 +193,36 @@ Once logged in, the user can track habits. This data is stored locally for priva
   <p><em>Figure 3: Diagram of the `useLocalStorage` hook managing habit data.</em></p>
 </div>
 
-#### **Step 4: Changing the Application Theme**
+#### **Step 4: AI-Powered Journal Analysis**
+
+After writing at least three journal entries, the user can get AI-powered insights.
+
+1.  **UI**: The user navigates to the Journal Analysis page (`src/app/(app)/journal/analysis/page.tsx`).
+2.  **Data Fetching**: The component retrieves all journal entries from Local Storage using the `useLocalStorage` hook.
+3.  **Connectivity**: When the user clicks the "Analyze My Journal" button, the contents of the journal entries are passed to the `analyzeJournalEntries` server function.
+4.  **AI Flow**: This function at `src/ai/flows/analyze-journal-entries.ts` invokes a Genkit flow. It sends the user's journal text to the AI model with a prompt that asks it to identify overall sentiment, emotional trends, and mental state insights.
+5.  **Response**: The structured analysis is returned and displayed in separate cards, giving the user a high-level overview of their recent emotional state.
+
+<div align="center">
+  <img src="https://storage.googleapis.com/stabl-media/c38676b7-8924-4e2e-8d9e-1083424d9c75.png" alt="Journal Analysis Flow" width="700">
+  <p><em>Figure 4: The process of analyzing journal entries with Genkit.</em></p>
+</div>
+
+#### **Step 5: Using the Meditation Player**
+
+The app includes a simple, focused meditation player.
+
+1.  **UI**: The user visits the Meditate page (`src/app/(app)/meditate/page.tsx`), which features the `MeditationPlayer` component.
+2.  **Client-Side Logic**: The player is built using React state and the **Tone.js** library for audio synthesis. Tone.js generates ambient sounds like rain or forest noise procedurally, avoiding the need to load large audio files.
+3.  **Functionality**: Users can select a duration for their meditation session (e.g., 5, 10, or 15 minutes) and choose an ambient background sound. The timer counts down, and the circular progress bar visually represents the time remaining.
+
+<div align="center">
+  <img src="https://storage.googleapis.com/stabl-media/c01ac8f4-6205-4c07-afb9-b5cd2123d14e.png" alt="Meditation Player" width="700">
+  <p><em>Figure 5: The meditation player with timer and sound options.</em></p>
+</div>
+
+
+#### **Step 6: Changing the Application Theme**
 
 Users can switch between a light and dark theme for visual comfort.
 
@@ -203,10 +232,10 @@ Users can switch between a light and dark theme for visual comfort.
 
 <div align="center">
   <img src="https://storage.googleapis.com/stabl-media/d629a997-c88f-4d39-9d7a-11504df0f7e8.png" alt="Theme Toggle Mechanism" width="700">
-  <p><em>Figure 4: The mechanism for toggling between light and dark themes.</em></p>
+  <p><em>Figure 6: The mechanism for toggling between light and dark themes.</em></p>
 </div>
 
-#### **Step 5: Accessing Localized Resources**
+#### **Step 7: Accessing Localized Resources**
 
 Recognizing the target demographic, the app provides a curated list of mental health resources in India.
 
@@ -216,5 +245,7 @@ Recognizing the target demographic, the app provides a curated list of mental he
 
 <div align="center">
   <img src="https://storage.googleapis.com/stabl-media/8718a3a9-e092-4919-948f-4ac6e812fd5d.png" alt="Resources Page" width="700">
-  <p><em>Figure 5: The Resources page displaying India-specific helplines.</em></p>
+  <p><em>Figure 7: The Resources page displaying India-specific helplines.</em></p>
 </div>
+
+    
