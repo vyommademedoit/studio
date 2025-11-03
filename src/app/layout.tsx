@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Lora, Nunito } from 'next/font/google';
 import { AuthProvider } from '@/context/auth-context';
 import { Toaster } from '@/components/ui/toaster';
+import { ThemeProvider } from '@/components/theme-provider';
 import './globals.css';
 
 const nunito = Nunito({
@@ -30,10 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${nunito.variable} ${lora.variable}`}>
       <body className="font-body antialiased">
-        <AuthProvider>
-          {children}
-          <Toaster />
-        </AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AuthProvider>
+            {children}
+            <Toaster />
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
